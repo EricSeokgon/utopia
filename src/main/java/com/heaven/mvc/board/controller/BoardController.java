@@ -97,9 +97,9 @@ public class BoardController {
 		boardVO.setSeq(seq);
 		boardVO.setPassword(pwd);
 
-		rowCount = boardService.delete(boardVO);
+		boolean deleted = boardService.delete(boardVO);
 
-		if (rowCount == 0) {
+		if (deleted == false) {
 			model.addAttribute("seq", seq);
 			model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
 			return "/board/delete";

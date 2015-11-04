@@ -1,8 +1,11 @@
-package com.haven.mvc;
+package com.heaven.mvc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.heaven.mvc.UtopiaApplication;
+
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

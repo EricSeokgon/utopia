@@ -24,27 +24,35 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> list() {
-		return boardDao.list();
+		return boardDao.findAll();
 	}
 
 	@Override
-	public int delete(BoardVO boardVO) {
-		return boardDao.delete(boardVO);
+	public boolean delete(BoardVO boardVO) {
+		BoardVO vo = boardDao.findOne(boardVO.getSeq());
+		if (vo.getPassword() == boardVO.getPassword()) {
+			boardDao.delete(boardVO);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public int edit(BoardVO boardVO) {
-		return boardDao.update(boardVO);
+	public BoardVO edit(BoardVO boardVO) {
+		return boardDao.save(boardVO);
 	}
 
 	@Override
-	public void write(BoardVO boardVO) {
-		boardDao.insert(boardVO);
+	public BoardVO write(BoardVO boardVO) {
+		return boardDao.save(boardVO);
 	}
 
 	@Override
 	public BoardVO read(int seq) {
-		boardDao.updateReadCount(seq);
-		return boardDao.select(seq);
+		BoardVO boardVO = boardDao.findOne(seq);
+		boardVO.setCnt(boardVO.getCnt() + 1);
+		boardDao.save(boardVO);
+
+		return boardVO;
 	}
 }
